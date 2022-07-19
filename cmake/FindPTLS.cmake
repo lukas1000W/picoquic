@@ -3,11 +3,11 @@
 find_path(PTLS_INCLUDE_DIR
     NAMES picotls/openssl.h
     HINTS ${PTLS_PREFIX}/include/picotls
-          ${CMAKE_SOURCE_DIR}/../picotls/include
-          ${CMAKE_BINARY_DIR}/../picotls/include
-          ../picotls/include/ )
+          ${CMAKE_SOURCE_DIR}/../../picotls/include
+          ${CMAKE_BINARY_DIR}/../../picotls/include
+          ../../picotls/include/ )
 
-set(PTLS_HINTS ${PTLS_PREFIX}/lib ${CMAKE_BINARY_DIR}/../picotls ../picotls)
+set(PTLS_HINTS ${PTLS_PREFIX}/lib ${CMAKE_BINARY_DIR}/../../picotls ../picotls)
 
 find_library(PTLS_CORE_LIBRARY picotls-core HINTS ${PTLS_HINTS})
 find_library(PTLS_OPENSSL_LIBRARY picotls-openssl HINTS ${PTLS_HINTS})
