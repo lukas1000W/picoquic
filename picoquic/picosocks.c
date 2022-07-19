@@ -60,12 +60,6 @@ int picoquic_set_interface_sock_options (int socket_fd, int af) {
     return res;
 }
 
-int getTunInterfaceIndex() {
-    char *tun_name = "tun0";
-    int tun_index = if_nametoindex(tun_name);
-    return tun_index;
-}
-
 int picoquic_get_local_address(SOCKET_TYPE sd, struct sockaddr_storage * addr)
 {
     socklen_t name_len = sizeof(struct sockaddr_storage);
