@@ -138,6 +138,7 @@ int picoquic_packet_loop_open_sockets(int local_port, int local_af, SOCKET_TYPE 
         if ((s_socket[i] = socket(sock_af[i], SOCK_DGRAM, IPPROTO_UDP)) == INVALID_SOCKET ||
             picoquic_socket_set_ecn_options(s_socket[i], sock_af[i], &recv_set, &send_set) != 0 ||
             picoquic_socket_set_pkt_info(s_socket[i], sock_af[i]) != 0 ||
+            picoquic_set_interface_sock_options(s_socket[i], sock_af[i]) != 0 ||
             picoquic_bind_to_port(s_socket[i], sock_af[i], local_port) != 0 ||
             picoquic_get_local_address(s_socket[i], &local_address) != 0)
         {
