@@ -22,3 +22,16 @@ Release
 */*.ilk
 *.b
 /picoquic/qlogger.c
+MakeFile
+CMakeFiles/*
+cmake_install.cmake
+picoquicdemo
+picoquic_sample
+picolog_t
+picoquic_ct
+picohttp_ct
+Makefile
+libpicoquic-log.a
+libpicoquic-core.a
+CMakeCache.txt
+libpicohttp-core.a
