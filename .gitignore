@@ -36,3 +36,5 @@ libpicoquic-core.a
 CMakeCache.txt
 libpicohttp-core.a
 *.log
+*.qlog
+*.bin
