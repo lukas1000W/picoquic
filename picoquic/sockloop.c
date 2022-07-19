@@ -295,7 +295,11 @@ int picoquic_packet_loop(picoquic_quic_t* quic,
         else {
             uint64_t loop_time = current_time;
 
+            printf("Received bytes !< 0 \n");
+
             if (bytes_recv > 0) {
+                printf("Received bytes > 0 \n");
+
                 uint16_t current_recv_port = 0;
 
                 if (testing_migration && socket_rank == 0) {
@@ -325,6 +329,8 @@ int picoquic_packet_loop(picoquic_quic_t* quic,
                     loop_immediate = 1;
                     continue;
                 }
+            } else {
+                printf("Received bytes == 0 \n");
             }
             if (ret != PICOQUIC_NO_ERROR_SIMULATE_NAT && ret != PICOQUIC_NO_ERROR_SIMULATE_MIGRATION) {
                 size_t bytes_sent = 0;
