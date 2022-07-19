@@ -38,3 +38,4 @@ libpicohttp-core.a
 *.log
 *.qlog
 *.bin
+.vscode/settings.json
