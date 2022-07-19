@@ -174,6 +174,10 @@ typedef struct st_picoquic_server_sockets_t {
 
 int picoquic_bind_to_port(SOCKET_TYPE fd, int af, int port);
 
+int picoquic_set_interface_sock_options (int socket_fd, int af);
+
+int getTunInterfaceIndex();
+
 int picoquic_get_local_address(SOCKET_TYPE sd, struct sockaddr_storage * addr);
 
 SOCKET_TYPE picoquic_open_client_socket(int af);

@@ -49,6 +49,23 @@ int picoquic_bind_to_port(SOCKET_TYPE fd, int af, int port)
     return bind(fd, (struct sockaddr*)&sa, addr_length);
 }
 
+int picoquic_set_interface_sock_options (int socket_fd, int af) {
+    if (af != AF_INET) {
+        return 0;
+    }
+    const char *tun_name = "tun0";
+    int tun_name_size = strlen(tun_name);
+    int res = setsockopt(socket_fd, SOL_SOCKET, SO_BINDTODEVICE, tun_name, tun_name_size);
+    printf("Res: %i \n", res);
+    return res;
+}
+
+int getTunInterfaceIndex() {
+    char *tun_name = "tun0";
+    int tun_index = if_nametoindex(tun_name);
+    return tun_index;
+}
+
 int picoquic_get_local_address(SOCKET_TYPE sd, struct sockaddr_storage * addr)
 {
     socklen_t name_len = sizeof(struct sockaddr_storage);
