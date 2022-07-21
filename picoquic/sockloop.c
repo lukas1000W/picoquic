@@ -142,7 +142,7 @@ int picoquic_packet_loop_open_sockets(int local_port, int local_af, SOCKET_TYPE 
             picoquic_bind_to_port(s_socket[i], sock_af[i], local_port) != 0 ||
             picoquic_get_local_address(s_socket[i], &local_address) != 0)
         {
-            DBG_PRINTF("Cannot set socket (af=%d, port = %d)\n", sock_af[i], local_port);
+            printf("Cannot set socket (af=%d, port = %d)\n", sock_af[i], local_port);
             for (int j = 0; j < i; j++) {
                 if (s_socket[i] != INVALID_SOCKET) {
                     SOCKET_CLOSE(s_socket[i]);

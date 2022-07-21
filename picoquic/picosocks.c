@@ -37,6 +37,10 @@ int picoquic_bind_to_port(SOCKET_TYPE fd, int af, int port)
         s4->sin_family = af;
 #endif
         s4->sin_port = htons((unsigned short)port);
+        // Bind artificially to IP Address
+        //char *ip_addr_string = "127.0.0.1";//"192.168.204.157";
+        //inet_pton(AF_INET, ip_addr_string, &(s4->sin_addr));
+        //s4->sin_addr.s_addr = inet_addr(ip_addr_string);
         addr_length = sizeof(struct sockaddr_in);
     } else {
         struct sockaddr_in6* s6 = (struct sockaddr_in6*)&sa;
@@ -1183,7 +1187,7 @@ int picoquic_select_ex(SOCKET_TYPE* sockets,
                         continue;
                     }
 #endif
-                    DBG_PRINTF("Could not receive packet on UDP socket[%d]= %d!\n",
+                    printf("Could not receive packet on UDP socket[%d]= %d!\n",
                         i, (int)sockets[i]);
 
                     break;
