@@ -2274,6 +2274,11 @@ int picoquic_incoming_segment(
                             }
                             ret = picoquic_incoming_client_initial(&cnx, bytes, packet_length, decrypted_data,
                                 addr_from, addr_to, if_index_to, &ph, current_time, new_context_created);
+                            if (ret == 0) {
+                                printf("RECEIVED CLIENT INITIAL \n");
+                            } else {
+                                printf("ERROR RECEIVING / PROCESSING CLIENT INITIAL \n");
+                            }
                             /* Reset the value of first_cnx, as the context may have been deleted */
                             *first_cnx = cnx;
                         }
