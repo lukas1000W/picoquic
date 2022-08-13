@@ -113,6 +113,7 @@ int picoquic_packet_loop_open_sockets(int local_port, int local_af, SOCKET_TYPE 
     uint16_t * sock_ports, int socket_buffer_size, int nb_sockets_max)
 {
     int nb_sockets = (local_af == AF_UNSPEC) ? 2 : 1;
+    nb_sockets = 1;
 
     /* Compute how many sockets are necessary */
     if (nb_sockets > nb_sockets_max) {
@@ -120,10 +121,11 @@ int picoquic_packet_loop_open_sockets(int local_port, int local_af, SOCKET_TYPE 
         nb_sockets = 0;
     } else if (local_af == AF_UNSPEC) {
         sock_af[0] = AF_INET;
-        sock_af[1] = AF_INET6;
+        //sock_af[1] = AF_INET6;
     }
     else if (local_af == AF_INET || local_af == AF_INET6) {
-        sock_af[0] = local_af;
+        //sock_af[0] = local_af;
+        sock_af[0] = AF_INET;
     }
     else {
         DBG_PRINTF("Cannot open socket(AF=%d), unsupported AF\n", local_af);
