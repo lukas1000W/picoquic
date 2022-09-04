@@ -371,8 +371,7 @@ int sample_server_callback(picoquic_cnx_t* cnx,
  *       if there is, send it.
  * - The loop breaks if the socket return an error. 
  */
-
-int picoquic_sample_server(int server_port, const char* server_cert, const char* server_key, const char* default_dir)
+int picoquic_sample_server(int server_port, const char* server_cert, const char* server_key, const char * default_dir, int timeout)
 {
     /* Start: start the QUIC process with cert and key files */
     int ret = 0;
@@ -418,7 +417,7 @@ int picoquic_sample_server(int server_port, const char* server_cert, const char*
      * still, get the faulty driver fixed.
      */
     if (ret == 0) {
-        ret = picoquic_packet_loop(quic, server_port, 0, 0, 0, 0, NULL, NULL);
+        ret = picoquic_packet_loop(quic, server_port, 0, 0, 0, 0, NULL, NULL, timeout);
     }
 
     /* And finish. */

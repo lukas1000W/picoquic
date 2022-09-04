@@ -71,7 +71,8 @@ int picoquic_packet_loop(picoquic_quic_t* quic,
     int socket_buffer_size,
     int do_not_use_gso,
     picoquic_packet_loop_cb_fn loop_callback,
-    void * loop_callback_ctx);
+    void * loop_callback_ctx, 
+    int timeout);
 
 #ifdef _WINDOWS
 int picoquic_packet_loop_win(picoquic_quic_t* quic,

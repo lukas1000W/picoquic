@@ -208,7 +208,8 @@ int picoquic_packet_loop(picoquic_quic_t* quic,
     int socket_buffer_size,
     int do_not_use_gso,
     picoquic_packet_loop_cb_fn loop_callback,
-    void* loop_callback_ctx)
+    void* loop_callback_ctx,
+    int timeout)
 {
     int ret = 0;
     uint64_t current_time = picoquic_get_quic_time(quic);
@@ -233,6 +234,8 @@ int picoquic_packet_loop(picoquic_quic_t* quic,
     picoquic_cnx_t* last_cnx = NULL;
     int loop_immediate = 0;
     picoquic_packet_loop_options_t options = { 0 };
+
+    int time_since_last_connection = current_time;
 #ifdef _WINDOWS
     WSADATA wsaData = { 0 };
     (void)WSA_START(MAKEWORD(2, 2), &wsaData);
@@ -494,6 +497,18 @@ int picoquic_packet_loop(picoquic_quic_t* quic,
                 }
             }
         }
+
+        // Check time since last connection. If that time exceeds the timeout, end loop.
+        int time = picoquic_get_quic_time(quic);
+        int _timeout = timeout;
+        if(_timeout == 0) {
+            _timeout = 10000; // Use default timout    
+        }
+        if( (time - time_since_last_connection) > _timeout) {
+            ret = PICOQUIC_NO_ERROR_TERMINATE_PACKET_LOOP;
+            printf("Timeout expired \n");
+        }
+
     }
 
     if (ret == PICOQUIC_NO_ERROR_TERMINATE_PACKET_LOOP) {
