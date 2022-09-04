@@ -445,7 +445,7 @@ static int sample_client_loop_cb(picoquic_quic_t* quic, picoquic_packet_loop_cb_
  */
 
 int picoquic_sample_client(char const * server_name, int server_port, char const * default_dir,
-    int nb_files, char const ** file_names, int timout)
+    int nb_files, char const ** file_names, int timeout)
 {
     int ret = 0;
     struct sockaddr_storage server_address;
@@ -550,7 +550,7 @@ int picoquic_sample_client(char const * server_name, int server_port, char const
     }
 
     /* Wait for packets */
-    ret = picoquic_packet_loop(quic, 0, server_address.ss_family, 0, 0, 0, sample_client_loop_cb, &client_ctx, tim);
+    ret = picoquic_packet_loop(quic, 0, server_address.ss_family, 0, 0, 0, sample_client_loop_cb, &client_ctx, timeout);
 
     /* Done. At this stage, we could print out statistics, etc. */
     sample_client_report(&client_ctx);
