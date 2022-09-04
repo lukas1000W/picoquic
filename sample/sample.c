@@ -84,8 +84,9 @@ int main(int argc, char** argv)
             int server_port = get_port(argv[0], argv[3]);
             char const** file_names = (char const **)(argv + 5);
             int nb_files = argc - 5;
+            int timeout = atoi( argv[5]);
 
-            exit_code = picoquic_sample_client(argv[2], server_port, argv[4], nb_files, file_names);
+            exit_code = picoquic_sample_client(argv[2], server_port, argv[4], nb_files, file_names, timeout);
         }
     }
     else if (strcmp(argv[1], "server") == 0) {
