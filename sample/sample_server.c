@@ -371,7 +371,7 @@ int sample_server_callback(picoquic_cnx_t* cnx,
  *       if there is, send it.
  * - The loop breaks if the socket return an error. 
  */
-int picoquic_sample_server(int server_port, const char* server_cert, const char* server_key, const char * default_dir, int timeout)
+int picoquic_sample_server(int server_port, const char* server_cert, const char* server_key, const char * default_dir, int timeout, char *cca)
 {
     /* Start: start the QUIC process with cert and key files */
     int ret = 0;
@@ -398,7 +398,20 @@ int picoquic_sample_server(int server_port, const char* server_cert, const char*
     else {
         picoquic_set_cookie_mode(quic, 2);
 
-        picoquic_set_default_congestion_algorithm(quic, picoquic_bbr_algorithm);
+        if((cca != NULL) && (strcmp(cca, "bbr") == 0)) 
+        {
+            picoquic_set_default_congestion_algorithm(quic, picoquic_bbr_algorithm);
+        } else if ((cca != NULL) && (strcmp(cca, "cubic") == 0))
+        {
+            picoquic_set_default_congestion_algorithm(quic, picoquic_cubic_algorithm);
+        } else if ((cca != NULL) && (strcmp(cca, "newreno") == 0)) {
+            // Use cubic congestion control as default.
+            picoquic_set_default_congestion_algorithm(quic, picoquic_newreno_algorithm);
+        } else {
+            printf("WARNING: Congestion control algorithm specified! \n");
+            printf("WARNING: Use cubic as default CCA! \n");
+            picoquic_set_default_congestion_algorithm(quic, picoquic_newreno_algorithm);
+        }
 
         picoquic_set_qlog(quic, qlog_dir);
 

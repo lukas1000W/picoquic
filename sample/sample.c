@@ -96,7 +96,7 @@ int main(int argc, char** argv)
         else {
             int server_port = get_port(argv[0], argv[2]);
             int timeout = atoi(argv[6]);
-            exit_code = picoquic_sample_server(server_port, argv[3], argv[4], argv[5], timeout);
+            exit_code = picoquic_sample_server(server_port, argv[3], argv[4], argv[5], timeout, argv[7]);
         }
     }
     else
