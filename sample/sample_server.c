@@ -388,7 +388,7 @@ int picoquic_sample_server(int server_port, const char* server_cert, const char*
     /* Create the QUIC context for the server */
     current_time = picoquic_current_time();
     /* Create QUIC context */
-    quic = picoquic_create(8, server_cert, server_key, NULL, PICOQUIC_SAMPLE_ALPN,
+    quic = picoquic_create(8, server_cert, server_key, NULL, FILE_SERVER_ALPN,
         sample_server_callback, &default_context, NULL, NULL, NULL, current_time, NULL, NULL, NULL, 0);
 
     if (quic == NULL) {

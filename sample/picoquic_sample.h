@@ -28,6 +28,7 @@
 extern "C" {
 #endif
 
+#define FILE_SERVER_ALPN "file_server"
 #define PICOQUIC_SAMPLE_ALPN "picoquic_sample"
 #define PICOQUIC_SAMPLE_SNI "test.example.com"
 
