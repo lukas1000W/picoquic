@@ -304,7 +304,7 @@ int picoquic_packet_loop(picoquic_quic_t* quic,
             // printf("Received bytes !< 0 \n");
 
             if (bytes_recv > 0) {
-                printf("Received bytes > 0 \n");
+                printf("Bytes received: %i \n", bytes_recv);
 
                 uint16_t current_recv_port = 0;
 

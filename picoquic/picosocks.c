@@ -1118,6 +1118,7 @@ int picoquic_sendmsg(SOCKET_TYPE fd,
             *sock_err = last_error;
         }
     }
+    printf("Bytes Send: %i of %i \n",bytes_sent, length);
     return bytes_sent;
 }
 #endif
