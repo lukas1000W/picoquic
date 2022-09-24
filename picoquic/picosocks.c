@@ -1119,7 +1119,7 @@ int picoquic_sendmsg(SOCKET_TYPE fd,
         }
     }
     uint64_t current_time = picoquic_current_time();
-    printf("Bytes Send: %i of %i at time: %"PRIu64" \n",bytes_sent, length, current_time);
+    printf("Bytes Send: %i of %i at time: %" PRIu64 " \n",bytes_sent, length, current_time);
     return bytes_sent;
 }
 #endif
