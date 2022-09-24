@@ -140,7 +140,7 @@ int picoquic_packet_loop_open_sockets(int local_port, int local_af, SOCKET_TYPE 
         if ((s_socket[i] = socket(sock_af[i], SOCK_DGRAM, IPPROTO_UDP)) == INVALID_SOCKET ||
             picoquic_socket_set_ecn_options(s_socket[i], sock_af[i], &recv_set, &send_set) != 0 ||
             picoquic_socket_set_pkt_info(s_socket[i], sock_af[i]) != 0 ||
-            picoquic_set_interface_sock_options(s_socket[i], sock_af[i]) != 0 ||
+            //picoquic_set_interface_sock_options(s_socket[i], sock_af[i]) != 0 ||
             picoquic_bind_to_port(s_socket[i], sock_af[i], local_port) != 0 ||
             picoquic_get_local_address(s_socket[i], &local_address) != 0)
         {
@@ -304,7 +304,8 @@ int picoquic_packet_loop(picoquic_quic_t* quic,
             // printf("Received bytes !< 0 \n");
 
             if (bytes_recv > 0) {
-                printf("Bytes received: %i \n", bytes_recv);
+                uint64_t at_time = picoquic_current_time();
+                printf("Bytes received: %i at time: %"PRIu64" \n", bytes_recv, at_time);
 
                 uint16_t current_recv_port = 0;
 
