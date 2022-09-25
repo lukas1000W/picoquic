@@ -999,6 +999,7 @@ int picoquic_recvmsg(SOCKET_TYPE fd,
     msg.msg_controllen = sizeof(cmsg_buffer);
 
     bytes_recv = recvmsg(fd, &msg, 0);
+    uint64_t at_time = picoquic_current_time();
     printf("Bytes received: %i at time: %"PRIu64" \n", bytes_recv, at_time);
 
     if (bytes_recv <= 0) {
@@ -1085,6 +1086,9 @@ int picoquic_sendmsg(SOCKET_TYPE fd,
 }
 #else
 {
+    uint64_t current_time = picoquic_current_time();
+    printf("Bytes Send: %i at time: %" PRIu64 " before sending and processing\n", length, current_time);
+
     struct msghdr msg;
     struct iovec dataBuf;
     char cmsg_buffer[1024];
