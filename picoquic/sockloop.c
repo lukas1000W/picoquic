@@ -305,7 +305,7 @@ int picoquic_packet_loop(picoquic_quic_t* quic,
 
             if (bytes_recv > 0) {
                 uint64_t at_time = picoquic_current_time();
-                printf("Bytes received: %i at time: %"PRIu64" \n", bytes_recv, at_time);
+                printf("Bytes received: %i at time: %"PRIu64" processing complete \n", bytes_recv, at_time);
 
                 uint16_t current_recv_port = 0;
 

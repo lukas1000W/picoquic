@@ -999,6 +999,7 @@ int picoquic_recvmsg(SOCKET_TYPE fd,
     msg.msg_controllen = sizeof(cmsg_buffer);
 
     bytes_recv = recvmsg(fd, &msg, 0);
+    printf("Bytes received: %i at time: %"PRIu64" \n", bytes_recv, at_time);
 
     if (bytes_recv <= 0) {
         addr_from->ss_family = 0;
